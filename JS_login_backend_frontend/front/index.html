@@ -1,62 +1,82 @@
 <html>
-  <body id="body">
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    inserire mail:
-    <input type="text" id="mail" placeholder="email" />
-    inserire password:
-    <input type="password" id="pwd" placeholder="password" />
-    <button id="in">sign-in</button>
-    <button id="up">signi-up</button>
-    <h1 id="h1"></h1>
-    <script>
-      $("#in").click(function () {
-        var mail = $("#mail").val();
-        var password = $("#pwd").val();
-        if (mail && password) {
-          $.ajax({
-            url:
-              "http://localhost:3000/api/login?mail=" +
-              mail +
-              "&password=" +
-              password,
-            method: "GET",
-            success: function (data) {
-              console.log("success", data);
-              $("body").css("background-color", "green");
-            },
-            error: function (data) {
-              console.log("error", data);
-              $("body").css("background-color", "red");
-            },
-          });
-        }
-      });
-      $("#up").click(function () {
-        var mail = $("#mail").val();
-        var password = $("#pwd").val();
-        if (mail && password) {
-          $.ajax({
-            url:
-              "http://localhost:3000/api/register?mail=" +
-              mail +
-              "&password=" +
-              password,
-            method: "GET",
-            success: function (data) {
-              console.log("success", data);
-              $("#h1").html("registrazione avvenuta correttamente");
-            },
-            error: function (data) {
-              console.log("error", data);
-              $("#h1").html("registrazione fallita");
-            },
-          });
-        }
-      });
-    </script>
-  </body>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>  
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <div class=".container-fluid">
+            <h1>LOGIN IN IN</h1>
+            <div class="form-floating">
+                <input type="text" id="mail" placeholder="email" />
+                <label for="floatingInput">inserire mail:</label>
+            </div>
+            <!-- inserire mail:
+            <input type="text" id="mail" placeholder="email" /> -->
+            inserire password:
+            <input type="password" id="psw" placeholder="password" />
+            <button id="b1" class="btn btn-dark">invia</button>
+            <br><br><br>
+            <h1>REGISTRAZIONE</h1>
+            inserire mail:
+            <input type="text" id="mail1" placeholder="email" />
+            inserire password:
+            <input type="password" id="psw1" placeholder="password" />
+            <button id="b2" class="btn btn-dark">invia</button>
+        </div>
+        <script>
+            $("#b1").click(function(){
+                let mail = $("#mail").val();
+                let psw = $("#psw").val();
+                if (mail && psw) {
+                    console.log($("#mail").val());
+                    console.log($("#psw").val());
+                    $.ajax(
+                        {
+                            url: ("http://localhost:5000/api/login?mail="+mail+"&psw="+psw),
+                            method: "GET",
+                            success: function(data){
+                                console.log("success: ",data)
+                                $("body").attr("style", "background-color: green");
+                            },
+                            error: function(data){
+                                $("body").attr("style", "background-color: red");
+                                console.log("error: ",data)
+                            }
+                        }
+                    )
+                } else {
+                    console.log("nessun valore")  
+                }  
+            });
+            $("#b2").click(function(){
+                let mail = $("#mail1").val();
+                let psw = $("#psw1").val();
+                if (mail && psw) {
+                    console.log($("#mail").val());
+                    console.log($("#psw").val());
+                    $.ajax(
+                        {
+                            url: ("http://localhost:5000/api/reg?mail="+mail+"&psw="+psw),
+                            method: "GET",
+                            success: function(data){
+                                console.log("success: ",data)
+                                $("body").attr("style", "background-color: green");
+                            },
+                            error: function(data){
+                                $("body").attr("style", "background-color: red");
+                                console.log("error: ",data)
+                            }
+                        }
+                    )
+                } else {
+                    console.log("nessun valore")  
+                }  
+            });
+        </script>
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+            crossorigin="anonymous">
+        </script>
+    </body>
 </html>
